@@ -1,213 +1,1086 @@
-index.html
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-<title>iOS Developer Panel</title>
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Rezssaxxxxx</title>
+
+<link rel="apple-touch-icon"
+href="https://i.postimg.cc/Gt4fVkYs/IMG-0020.png">
+
+<link rel="icon" type="image/png"
+href="https://i.postimg.cc/Gt4fVkYs/IMG-0020.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
-body{
+
+:root{
+    --bg:#fff8f1;
+    --card:#ffffff;
+    --soft:#fff1e3;
+
+    --line:rgba(255,140,0,.12);
+
+    --text:#1f1f1f;
+    --sub:#808080;
+
+    --orange:#ff8c00;
+    --orange2:#ffb347;
+
+    --green:#00c978;
+}
+
+*{
     margin:0;
     padding:0;
-    background:#0f172a;
-    font-family:Arial;
-    color:white;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body{
+    width:100%;
+    min-height:100vh;
+
+    background:
+    radial-gradient(circle at top,
+    #ffe0bb 0%,
+    #fff8f1 55%);
+
+    overflow:hidden;
+
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
+
+    color:var(--text);
 }
-.panel{
-    width:340px;
-    background:#1e293b;
-    border-radius:20px;
-    padding:20px;
-    box-shadow:0 0 25px rgba(0,0,0,0.5);
+
+/* ===== MAIN WINDOW ===== */
+
+.window{
+    width:95%;
+    max-width:1350px;
+    height:92vh;
+
+    background:rgba(255,255,255,.78);
+
+    backdrop-filter:blur(30px);
+
+    border:1px solid rgba(255,140,0,.12);
+
+    border-radius:34px;
+
+    overflow:hidden;
+
+    display:flex;
+
+    box-shadow:
+    0 30px 80px rgba(255,140,0,.15),
+    inset 0 1px 0 rgba(255,255,255,.9);
+
+    position:relative;
 }
-.title{
-    text-align:center;
-    font-size:28px;
-    margin-bottom:20px;
-    font-weight:bold;
+
+/* ===== SIDEBAR ===== */
+
+.sidebar{
+    width:300px;
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(255,140,0,.10),
+        rgba(255,255,255,.60)
+    );
+
+    border-right:1px solid rgba(255,140,0,.10);
+
+    padding:24px;
+
+    position:relative;
 }
-button{
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    margin-bottom:35px;
+}
+
+.logo img{
+    width:74px;
+    height:74px;
+
+    border-radius:24px;
+
+    border:1px solid rgba(255,140,0,.25);
+
+    box-shadow:
+    0 15px 35px rgba(255,140,0,.18);
+}
+
+.logo h1{
+    font-size:26px;
+    font-weight:900;
+    letter-spacing:-1px;
+}
+
+.logo p{
+    margin-top:5px;
+
+    font-size:11px;
+    font-weight:700;
+
+    color:var(--orange);
+
+    letter-spacing:4px;
+}
+
+/* KEY */
+
+.key-box{
     width:100%;
-    height:55px;
-    border:none;
-    border-radius:15px;
-    margin-top:12px;
-    font-size:17px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.2s;
-}
-button:hover{
-    transform:scale(1.02);
-}
-.open{
-    background:#22c55e;
+
+    padding:18px;
+
+    border-radius:22px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff9500,
+        #ffb84d
+    );
+
     color:white;
+
+    margin-bottom:25px;
+
+    box-shadow:
+    0 18px 35px rgba(255,140,0,.20);
 }
-.close{
-    background:#ef4444;
-    color:white;
+
+.key-box span{
+    font-size:11px;
+    font-weight:700;
+    opacity:.85;
+    letter-spacing:2px;
 }
-.proxy{
-    background:#3b82f6;
-    color:white;
+
+.key-box h2{
+    margin-top:8px;
+
+    font-size:26px;
+    font-weight:900;
+
+    letter-spacing:2px;
 }
-.greenbottom{
-    background:#16a34a;
-    color:white;
+
+/* NAV */
+
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
 }
-.status{
-    margin-top:18px;
-    text-align:center;
-    color:#94a3b8;
-    font-size:15px;
+
+.nav-item{
+    height:62px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.65);
+
+    border:1px solid rgba(255,140,0,.08);
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    padding:0 18px;
+
+    transition:.22s;
 }
-.log{
-    margin-top:15px;
-    background:#0f172a;
-    border-radius:12px;
-    height:130px;
+
+.nav-item.active{
+    background:
+    linear-gradient(
+        90deg,
+        rgba(255,140,0,.16),
+        rgba(255,255,255,.75)
+    );
+
+    border-color:
+    rgba(255,140,0,.24);
+
+    box-shadow:
+    0 12px 25px rgba(255,140,0,.10);
+}
+
+.nav-item:active{
+    transform:scale(.98);
+}
+
+.nav-icon{
+    width:40px;
+    height:40px;
+
+    border-radius:14px;
+
+    background:rgba(255,140,0,.12);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:18px;
+}
+
+.nav-item span{
+    font-size:14px;
+    font-weight:700;
+}
+
+/* ===== MAIN ===== */
+
+.main{
+    flex:1;
+
+    padding:28px;
+
     overflow:auto;
-    padding:10px;
-    font-size:13px;
 }
+
+/* TOP */
+
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:24px;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.dot{
+    width:13px;
+    height:13px;
+
+    border-radius:50%;
+
+    background:var(--green);
+
+    box-shadow:
+    0 0 14px var(--green);
+}
+
+.status h2{
+    font-size:20px;
+    font-weight:800;
+}
+
+.status p{
+    margin-top:4px;
+
+    color:var(--sub);
+
+    font-size:12px;
+}
+
+.premium{
+    padding:14px 18px;
+
+    border-radius:16px;
+
+    background:white;
+
+    border:1px solid rgba(255,140,0,.08);
+
+    font-size:13px;
+    font-weight:800;
+
+    box-shadow:
+    0 10px 25px rgba(255,140,0,.05);
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+/* CARD */
+
+.card{
+    background:
+    linear-gradient(
+        180deg,
+        rgba(255,255,255,.92),
+        rgba(255,248,241,.96)
+    );
+
+    border:1px solid rgba(255,140,0,.08);
+
+    border-radius:30px;
+
+    padding:24px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.card::before{
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+    height:250px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        rgba(255,140,0,.10),
+        transparent 70%
+    );
+
+    top:-130px;
+    right:-130px;
+}
+
+.card h3{
+    font-size:17px;
+    font-weight:800;
+
+    margin-bottom:20px;
+}
+
+/* SETTINGS */
+
+.setting{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:16px 0;
+
+    border-bottom:
+    1px solid rgba(255,140,0,.06);
+}
+
+.setting:last-child{
+    border:none;
+}
+
+.left{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.mini{
+    width:46px;
+    height:46px;
+
+    border-radius:16px;
+
+    background:rgba(255,140,0,.08);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:18px;
+}
+
+.left h4{
+    font-size:14px;
+    font-weight:700;
+}
+
+.left p{
+    margin-top:3px;
+
+    font-size:12px;
+    color:var(--sub);
+}
+
+/* SWITCH */
+
+.switch{
+    position:relative;
+
+    width:60px;
+    height:32px;
+}
+
+.switch input{
+    display:none;
+}
+
+.slider{
+    position:absolute;
+    inset:0;
+
+    background:#dddddd;
+
+    border-radius:50px;
+
+    transition:.25s;
+}
+
+.slider::before{
+    content:"";
+
+    position:absolute;
+
+    width:26px;
+    height:26px;
+
+    border-radius:50%;
+
+    background:white;
+
+    top:3px;
+    left:3px;
+
+    transition:.25s;
+}
+
+.switch input:checked + .slider{
+    background:var(--orange);
+
+    box-shadow:
+    0 0 15px rgba(255,140,0,.35);
+}
+
+.switch input:checked + .slider::before{
+    transform:translateX(28px);
+}
+
+/* ACTIONS */
+
+.actions{
+    display:flex;
+    gap:16px;
+
+    margin-top:24px;
+}
+
+.btn{
+    flex:1;
+
+    height:62px;
+
+    border:none;
+
+    border-radius:20px;
+
+    font-size:15px;
+    font-weight:900;
+
+    transition:.22s;
+}
+
+.btn:active{
+    transform:scale(.97);
+}
+
+.main-btn{
+    background:
+    linear-gradient(
+        135deg,
+        #ff9500,
+        #ffb84d
+    );
+
+    color:white;
+
+    box-shadow:
+    0 18px 35px rgba(255,140,0,.20);
+}
+
+.second-btn{
+    background:white;
+
+    border:1px solid rgba(255,140,0,.08);
+
+    color:#333;
+
+    box-shadow:
+    0 10px 25px rgba(255,140,0,.05);
+}
+
+/* WARNING */
+
+.warning{
+    margin-top:22px;
+
+    border-radius:22px;
+
+    padding:18px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(255,140,0,.10),
+        rgba(255,255,255,.7)
+    );
+
+    border:1px solid rgba(255,140,0,.10);
+
+    display:flex;
+    gap:14px;
+}
+
+.warn-icon{
+    width:52px;
+    height:52px;
+
+    border-radius:16px;
+
+    background:rgba(255,140,0,.12);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:22px;
+}
+
+.warning h4{
+    font-size:14px;
+    font-weight:800;
+
+    margin-bottom:4px;
+}
+
+.warning p{
+    color:#cc7700;
+
+    font-size:12px;
+
+    line-height:1.5;
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+    body{
+        padding:12px;
+        overflow:auto;
+    }
+
+    .window{
+        flex-direction:column;
+        height:auto;
+        min-height:100vh;
+
+        border-radius:26px;
+    }
+
+    .sidebar{
+        width:100%;
+
+        border-right:none;
+        border-bottom:1px solid rgba(255,140,0,.10);
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .top{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:14px;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+}
+
 </style>
 </head>
 <body>
-<div class="panel">
-<div class="title">
-Developer Menu
+
+<div class="window">
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+
+            <img src="https://i.postimg.cc/Gt4fVkYs/IMG-0020.png">
+
+            <div>
+                <h1>Reczssa</h1>
+                <p>TikTok rezssaxxxxx</p>
+            </div>
+
+        </div>
+
+        <!-- KEY -->
+
+        <div class="key-box">
+
+            <span>PREMIUM ACCESS KEY</span>
+
+            <h2>กุเพิ่งทำครับ ดีไม่ดีบอกด้วย</h2>
+
+        </div>
+
+        <!-- NAV -->
+
+        <div class="nav">
+
+            <div class="nav-item active">
+                <div class="nav-icon">✅</div>
+                <span>ใช้ได้แค่ ios</span>
+            </div>
+
+            <div class="nav-item">
+                <div class="nav-icon"> ✅ </div>
+                <span>ไม่ดำไม่แบน</span>
+            </div>
+
+            <div class="nav-item">
+                <div class="nav-icon"> ✅ </div>
+                <span>ใช้ดีฝากบอกต่อ</span>
+            </div>
+
+            <div class="nav-item">
+                <div class="nav-icon"> ✅ </div>
+                <span>ติดต่อผู้สร้าง TikTok :  rezssaxxxxx</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+        <!-- TOP -->
+
+        <div class="top">
+
+            <div class="status">
+
+                <div class="dot"></div>
+
+                <div>
+                    <h2>สถานะ</h2>
+                    <p>Encrypted connection established</p>
+                </div>
+
+            </div>
+
+            <div class="premium">
+                PREMIUM USER
+            </div>
+
+        </div>
+
+        <!-- GRID -->
+
+        <div class="grid">
+
+            <!-- CARD -->
+
+            <div class="card">
+
+                <h3>( ติ๊กเปิดทุกอันแนะนำ!! )</h3>
+
+                <div class="setting">
+
+                    <div class="left">
+
+                        <div class="mini">☠️</div>
+
+                        <div>
+                            <h4>ตัวขึ้นหัว</h4>
+                            <p>Advanced lock system</p>
+                        </div>
+
+                    </div>
+
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+
+                </div>
+
+                <div class="setting">
+
+                    <div class="left">
+
+                        <div class="mini">💀</div>
+
+                        <div>
+                            <h4>ดูดหัว</h4>
+                            <p>Magnetic precision mode</p>
+                        </div>
+
+                    </div>
+
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+
+                </div>
+
+                <div class="setting">
+
+                    <div class="left">
+
+                        <div class="mini">✅</div>
+
+                        <div>
+                            <h4>กันแบน</h4>
+                            <p>Realtime shield protection</p>
+                        </div>
+
+                    </div>
+
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+
+                </div>
+
+            </div>
+
+            <!-- CARD -->
+
+            <div class="card">
+
+                <h3>System Controls</h3>
+
+                <div class="setting">
+
+                    <div class="left">
+
+                        <div class="mini">✅</div>
+
+                        <div>
+                            <h4>กันดำ</h4>
+                            <p>Visual secure protection</p>
+                        </div>
+
+                    </div>
+
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+
+                </div>
+
+                <div class="setting">
+
+                    <div class="left">
+
+                        <div class="mini">😏</div>
+
+                        <div>
+                            <h4>Ultra Speed</h4>
+                            <p>High performance engine</p>
+                        </div>
+
+                    </div>
+
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+
+                </div>
+
+                <div class="setting">
+
+                    <div class="left">
+
+                        <div class="mini">🌐</div>
+
+                        <div>
+                            <h4>Proxy Tunnel</h4>
+                            <p>Secure proxy connection</p>
+                        </div>
+
+                    </div>
+
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ACTIONS -->
+
+        <div class="actions">
+
+            <button
+            class="btn main-btn"
+            id="activateBtn">
+
+                ACTIVATE SYSTEM
+
+            </button>
+
+            <button class="btn second-btn">
+
+                CONFIG PANEL
+
+            </button>
+
+        </div>
+
+        <!-- WARNING -->
+
+        <div class="warning">
+
+            <div class="warn-icon">
+                ⚠️
+            </div>
+
+            <div>
+
+                <h4>System Notice</h4>
+
+                <p>
+                    กรุณาอย่าอ้วน พวกไก่!!
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
-<button class="open"
-onclick="openMenu()">
-OPEN MENU
-</button>
-<button class="close"
-onclick="closeMenu()">
-CLOSE MENU
-</button>
-<button class="greenbottom"
-onclick="connectProxy()">
-CONNECT PROXY
-</button>
-<div class="status"
-id="status">
-Disconnected
-</div>
-<div class="log"
-id="log">
-System Ready...
-</div>
-</div>
+
 <script>
-let socket;
-let menuOpened = false;
-function addLog(text){
-    let log =
-    document.getElementById("log");
-    log.innerHTML += "<br>" + text;
-    log.scrollTop =
-    log.scrollHeight;
-}
-function connectProxy(){
-    if(!menuOpened){
-        alert("Open menu first");
-        return;
-    }
-    socket =
-    new WebSocket(
-    "ws://YOUR_SERVER_IP:3000"
-    );
-    socket.onopen = function(){
-        document.getElementById(
-        "status"
-        ).innerHTML = "Proxy Connected";
-        addLog("Proxy Connected");
-        socket.send(JSON.stringify({
-            command:"proxy_connect",
-            device:"ios"
-        }));
-    };
-    socket.onmessage = function(event){
-        addLog("Server: " + event.data);
-    };
-    socket.onclose = function(){
-        document.getElementById(
-        "status"
-        ).innerHTML = "Disconnected";
-        addLog("Disconnected");
-    };
-    socket.onerror = function(){
-        addLog("Connection Error");
-    };
-}
-function openMenu(){
-    menuOpened = true;
-    addLog("Menu Opened");
-    document.getElementById(
-    "status"
-    ).innerHTML = "Menu Enabled";
-}
-function closeMenu(){
-    menuOpened = false;
-    addLog("Menu Closed");
-    document.getElementById(
-    "status"
-    ).innerHTML = "Menu Disabled";
-    if(socket){
-        socket.close();
-    }
-}
+
+const btn =
+document.getElementById("activateBtn");
+
+btn.onclick = () => {
+
+    btn.innerHTML =
+    "CONNECTING...";
+
+    btn.style.opacity = ".85";
+
+    setTimeout(() => {
+
+        btn.innerHTML =
+        "SYSTEM ACTIVE";
+
+        btn.style.background =
+        "#00c978";
+
+        btn.style.color =
+        "#fff";
+
+        /* เปิด Potatso / Proxy */
+
+        window.location.href =
+        "potatso://";
+
+    },1500);
+
+};
+
 </script>
+
+<script type="module">
+
+import { initializeApp }
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+
+getFirestore,
+doc,
+getDoc,
+updateDoc
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* เอา config ของคุณมาใส่ */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBdSsDIgiB2RvqC0udxgp8YNyBFDsksDUw",
+
+authDomain:
+"reczssa.firebaseapp.com",
+
+projectId:
+"reczssa",
+
+storageBucket:
+"reczssa.firebasestorage.app",
+
+messagingSenderId:
+"726475292690",
+
+appId:
+"1:726475292690:web:12d844b3b605ad650cd8cb"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+/* DEVICE ID */
+
+let deviceId =
+localStorage.getItem("device_id");
+
+if(!deviceId){
+
+deviceId =
+crypto.randomUUID();
+
+localStorage.setItem(
+"device_id",
+deviceId
+);
+
+}
+
+/* CHECK KEY */
+
+window.checkKey =
+async function(){
+
+const key =
+document
+.getElementById("keyInput")
+.value
+.trim();
+
+const ref =
+doc(db,"keys",key);
+
+const snap =
+await getDoc(ref);
+
+if(!snap.exists()){
+
+alert("INVALID KEY");
+return;
+
+}
+
+const data =
+snap.data();
+
+/* BAN CHECK */
+
+if(data.banned){
+
+alert("BANNED");
+return;
+
+}
+
+/* EXPIRE CHECK */
+
+const now =
+new Date();
+
+const expire =
+new Date(data.expire);
+
+if(now > expire){
+
+alert("KEY EXPIRED");
+return;
+
+}
+
+/* DEVICE LOCK */
+
+if(
+data.used &&
+data.device !== deviceId
+){
+
+alert("KEY ALREADY USED");
+return;
+
+}
+
+/* FIRST LOGIN */
+
+if(!data.used){
+
+await updateDoc(ref,{
+
+used:true,
+device:deviceId
+
+});
+
+}
+
+/* SAVE LOGIN */
+
+localStorage.setItem(
+"saved_key",
+key
+);
+
+/* SUCCESS */
+
+alert("LOGIN SUCCESS");
+
+/* เปิดเมนู */
+
+document
+.getElementById("keyOverlay")
+.style.display =
+"none";
+
+}
+
+</script>
+
+
 </body>
 </html>
-
-server.js
-
-const WebSocket = require('ws');
-const wss = new WebSocket.Server({
-    port:3000
-});
-console.log("Server Started");
-wss.on('connection', function connection(ws){
-    console.log("Client Connected");
-    ws.send("Connected To Server");
-    ws.on('message', function incoming(message){
-        console.log(message.toString());
-        let data;
-        try{
-            data =
-            JSON.parse(message);
-        }catch(e){
-            return;
-        }
-        switch(data.command){
-            case "proxy_connect":
-                console.log(
-                "iOS Proxy Connected"
-                );
-                ws.send(
-                "Proxy Connected"
-                );
-            break;
-        }
-    });
-    ws.on('close', function(){
-        console.log(
-        "Client Disconnected"
-        );
-    });
-});
-
-Run Server
-
-npm install ws
-node server.js
-
-Upload To GitHub
