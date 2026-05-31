@@ -643,7 +643,7 @@ body{
 
     <span>PREMIUM ACCESS KEY</span>
 
-    <h2>ทดลองใช้ไปก่อน</h2>
+    <h2>คีย์จะหมดอายุอีก</h2>
 
     <div id="countdownBox"
     style="
@@ -1014,7 +1014,7 @@ await getDoc(ref);
 
 if(!snap.exists()){
 
-alert("INVALID KEY");
+alert("คีย์ไม่ถูกต้อง กรุณาซื้อคีย์ก่อน");
 return;
 
 }
@@ -1057,7 +1057,7 @@ data.used &&
 data.device !== deviceId
 ){
 
-alert("KEY ALREADY USED");
+alert("คีย์ถูกใช้ไปแล้ว");
 return;
 
 }
@@ -1126,7 +1126,7 @@ content:
 
 });
 
-alert("LOGIN SUCCESS");
+alert("ล็อคอินสำเสร็จ");
 
 document
 .getElementById(
@@ -1160,15 +1160,50 @@ box-shadow:0 20px 60px rgba(0,0,0,.12);
 }
 
 .keyLogin input{
+
 width:100%;
-height:58px;
+
+height:65px;
+
 border:none;
+
 outline:none;
-background:#f4f4f4;
+
 border-radius:18px;
-padding:0 18px;
+
+padding:0 20px;
+
 margin-bottom:15px;
+
 font-size:16px;
+
+font-weight:700;
+
+color:white;
+
+background:
+
+linear-gradient(
+rgba(0,0,0,.25),
+rgba(0,0,0,.25)
+),
+
+url("https://i.postimg.cc/Gt4fVkYs/IMG-0020.png");
+
+background-size:cover;
+
+background-position:center;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.15);
+
+}
+
+.keyLogin input::placeholder{
+
+color:
+rgba(255,255,255,.85);
+
 }
 
 .keyLogin button{
@@ -1212,7 +1247,7 @@ border:2px solid #ff8c00;
 
 <div class="keyLogin">
 
-<h1>ENTER KEY</h1>
+<h1>Reczssa1.0</h1>
 
 <p style="margin:15px 0;">
 กรอกคีย์เพื่อเข้าใช้งาน
