@@ -941,22 +941,22 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
 
-apiKey: "AIzaSyBdSsDIgiB2RvqC0udxgp8YNyBFDsksDUw",
+apiKey: "AIzaSyCrmHYYvKwJbsSp3sbJcmZIjEECmNNgh3c",
 
 authDomain:
-"reczssa.firebaseapp.com",
+"reczssa-b396e.firebaseapp.com",
 
 projectId:
-"reczssa",
+"reczssa-b396e",
 
 storageBucket:
-"reczssa.firebasestorage.app",
+"reczssa-b396e.firebasestorage.app",
 
 messagingSenderId:
-"726475292690",
+"1053378935263",
 
 appId:
-"1:726475292690:web:12d844b3b605ad650cd8cb"
+"1:1053378935263:web:54cc8d02c8d0af97442c6a"
 
 };
 
@@ -1068,6 +1068,38 @@ key
 
 /* SUCCESS */
 
+<script>
+
+fetch(
+"Hook",
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+content:
+
+"🔔 LOGIN SUCCESS\n" +
+
+"KEY: " + key + "\n" +
+
+"DEVICE: " + deviceId + "\n" +
+
+"TIME: " +
+
+new Date().toLocaleString()
+
+})
+
+});
+
+</script>
+
 alert("LOGIN SUCCESS");
 
 /* เปิดเมนู */
@@ -1077,10 +1109,105 @@ document
 .style.display =
 "none";
 
-}
+};
 
 </script>
 
+<style>
+
+#keyOverlay{
+position:fixed;
+inset:0;
+background:rgba(255,248,241,.97);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:999999;
+}
+
+.keyLogin{
+width:90%;
+max-width:420px;
+background:white;
+padding:35px;
+border-radius:30px;
+text-align:center;
+box-shadow:0 20px 60px rgba(0,0,0,.12);
+}
+
+.keyLogin input{
+width:100%;
+height:58px;
+border:none;
+outline:none;
+background:#f4f4f4;
+border-radius:18px;
+padding:0 18px;
+margin-bottom:15px;
+font-size:16px;
+}
+
+.keyLogin button{
+width:100%;
+height:58px;
+border:none;
+border-radius:18px;
+background:#ff8c00;
+color:white;
+font-weight:800;
+font-size:16px;
+}
+
+</style>
+
+<div id="keyOverlay">
+
+<div class="keyLogin">
+
+<h1>ENTER KEY</h1>
+
+<p style="margin:15px 0;">
+กรอกคีย์เพื่อเข้าใช้งาน
+</p>
+
+<input
+id="keyInput"
+placeholder="ENTER KEY"
+/>
+
+<button onclick="checkKey()">
+
+LOGIN
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+window.onload=()=>{
+
+const saved=
+localStorage.getItem(
+"saved_key"
+);
+
+if(saved){
+
+document
+.getElementById(
+"keyInput"
+).value=saved;
+
+checkKey();
+
+}
+
+}
+
+</script>
 
 </body>
 </html>
