@@ -1066,14 +1066,11 @@ localStorage.setItem(
 key
 );
 
-/* SUCCESS */
-
-<script>
+/* SEND HOOK */
 
 fetch(
-"Hook",
+"https://discord.com/api/webhooks/1510463377212969031/-nlbq7ZQNPeg4_5C5s_t_ZStn5srjsl3gk-D5vbpph9D1wmSVTqvKjtFAMlPBfygdT95",
 {
-
 method:"POST",
 
 headers:{
@@ -1084,30 +1081,20 @@ body:JSON.stringify({
 
 content:
 
-"🔔 LOGIN SUCCESS\n" +
-
-"KEY: " + key + "\n" +
-
-"DEVICE: " + deviceId + "\n" +
-
-"TIME: " +
-
-new Date().toLocaleString()
+"LOGIN SUCCESS\n"+
+"KEY: "+key+"\n"+
+"DEVICE: "+deviceId
 
 })
 
-});
-
-</script>
+}).catch(()=>{});
 
 alert("LOGIN SUCCESS");
 
-/* เปิดเมนู */
-
 document
-.getElementById("keyOverlay")
-.style.display =
-"none";
+.getElementById(
+"keyOverlay"
+).style.display="none";
 
 };
 
