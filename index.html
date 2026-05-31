@@ -18,17 +18,17 @@ href="https://i.postimg.cc/1R6jrNGt/quality-restoration-25690531122239716.png">
 <style>
 
 :root{
-    --bg:#fff8f1;
+    --bg:#f7f3ff;
     --card:#ffffff;
-    --soft:#fff1e3;
+    --soft:#f1ecff;
 
-    --line:rgba(255,140,0,.12);
+    --line:rgba(140,90,255,.15);
 
     --text:#1f1f1f;
-    --sub:#808080;
+    --sub:#7a7a7a;
 
-    --orange:#ff8c00;
-    --orange2:#ffb347;
+    --purple:#7c4dff;
+    --purple2:#b388ff;
 
     --green:#00c978;
 }
@@ -45,11 +45,7 @@ body{
     width:100%;
     min-height:100vh;
 
-    background:
-    radial-gradient(circle at top,
-    #ffe0bb 0%,
-    #fff8f1 55%);
-
+    position:relative;
     overflow:hidden;
 
     display:flex;
@@ -57,6 +53,35 @@ body{
     align-items:center;
 
     color:var(--text);
+}
+
+/* background image layer */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background-image:url("https://i.postimg.cc/1R6jrNGt/quality-restoration-25690531122239716.png");
+    background-size:cover;
+    background-position:center;
+
+    filter:blur(18px);
+    transform:scale(1.1);
+
+    opacity:0.35;
+
+    z-index:-2;
+}
+
+/* white/purple soft overlay */
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:rgba(247,243,255,0.75);
+
+    z-index:-1;
 }
 
 /* ===== MAIN WINDOW ===== */
@@ -1176,6 +1201,16 @@ document
 
 <style>
 
+#lightning{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    pointer-events:none;
+    opacity:0.7;
+}
+
 #keyOverlay{
 position:fixed;
 inset:0;
@@ -1433,5 +1468,58 @@ box.innerHTML=
 
 </script>
 
+<script>
+const canvas = document.getElementById("lightning");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener("resize", ()=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+function drawLightning(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    let startX = Math.random() * canvas.width;
+    let startY = 0;
+
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+
+    let segments = 8;
+    let x = startX;
+    let y = 0;
+
+    for(let i=0;i<segments;i++){
+        x += (Math.random()-0.5)*80;
+        y += canvas.height/segments;
+
+        ctx.lineTo(x,y);
+    }
+
+    ctx.strokeStyle = "rgba(180,220,255,0.9)";
+    ctx.shadowColor = "rgba(255,255,255,0.9)";
+    ctx.shadowBlur = 20;
+    ctx.lineWidth = 2;
+
+    ctx.stroke();
+
+    // flash effect
+    document.body.style.filter = "brightness(1.4)";
+    setTimeout(()=>{
+        document.body.style.filter = "brightness(1)";
+    },80);
+}
+
+setInterval(drawLightning, 1200);
+</script>
+
 </body>
+
+<canvas id="lightning"></canvas>
+
 </html>
