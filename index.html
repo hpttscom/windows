@@ -8,10 +8,10 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 <title>Rezssaxxxxx</title>
 
 <link rel="apple-touch-icon"
-href="https://i.postimg.cc/Gt4fVkYs/IMG-0020.png">
+href="https://i.postimg.cc/1R6jrNGt/quality-restoration-25690531122239716.png">
 
 <link rel="icon" type="image/png"
-href="https://i.postimg.cc/Gt4fVkYs/IMG-0020.png">
+href="https://i.postimg.cc/1R6jrNGt/quality-restoration-25690531122239716.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
@@ -628,7 +628,7 @@ body{
 
         <div class="logo">
 
-            <img src="https://i.postimg.cc/Gt4fVkYs/IMG-0020.png">
+            <img src="https://i.postimg.cc/1R6jrNGt/quality-restoration-25690531122239716.png">
 
             <div>
                 <h1>Reczssa</h1>
@@ -1130,49 +1130,38 @@ saveLoginHistory(
 key
 );
 
-/* SEND HOOK */
+/* SEND HOOK (ยิงแค่ครั้งแรกต่อ key + device) */
 
-const status =
+const logKey = "logged_" + key + "_" + deviceId;
 
-(new Date() > expire)
+if (!localStorage.getItem(logKey)) {
 
-? "🔴 OFFLINE / EXPIRED"
+  const status =
+    (new Date() > expire)
+      ? "🔴 OFFLINE / EXPIRED"
+      : "🟢 ONLINE / ACTIVE";
 
-: "🟢 ONLINE / ACTIVE";
+  fetch(
+    "https://discord.com/api/webhooks/1510463377212969031/-nlbq7ZQNPeg4_5C5s_t_ZStn5srjsl3gk-D5vbpph9D1wmSVTqvKjtFAMlPBfygdT95",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content:
+          "━━━━━━━━━━━━\n" +
+          "🔔 LOGIN EVENT\n\n" +
+          "KEY : " + key + "\n" +
+          "DEVICE : " + deviceId + "\n" +
+          "STATUS : " + status + "\n" +
+          "EXPIRE : " + data.expire + "\n" +
+          "TIME : " + new Date().toLocaleString() + "\n" +
+          "━━━━━━━━━━━━"
+      })
+    }
+  );
 
-fetch(
-"https://discord.com/api/webhooks/1510463377212969031/-nlbq7ZQNPeg4_5C5s_t_ZStn5srjsl3gk-D5vbpph9D1wmSVTqvKjtFAMlPBfygdT95",
-{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-content:
-
-"━━━━━━━━━━━━\n"+
-
-"🔔 LOGIN EVENT\n\n"+
-
-"KEY : "+key+"\n"+
-
-"DEVICE : "+deviceId+"\n"+
-
-"STATUS : "+status+"\n"+
-
-"EXPIRE : "+data.expire+"\n"+
-
-"TIME : "+new Date().toLocaleString()+"\n"+
-
-"━━━━━━━━━━━━"
-
-})
-
-});
+  localStorage.setItem(logKey, "1");
+}
 
 alert("ล็อคอินสำเสร็จ");
 
@@ -1219,7 +1208,7 @@ rgba(255,255,255,.82),
 rgba(255,255,255,.82)
 ),
 
-url("https://i.postimg.cc/Gt4fVkYs/IMG-0020.png");
+url("https://i.postimg.cc/1R6jrNGt/quality-restoration-25690531122239716.png");
 
 background-size:cover;
 
