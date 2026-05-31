@@ -283,6 +283,19 @@ body::after{
 
 /* TOP */
 
+<button id="themeToggle" style="
+padding:10px 14px;
+border-radius:12px;
+border:none;
+font-weight:800;
+cursor:pointer;
+background:#7c4dff;
+color:white;
+box-shadow:0 0 15px rgba(124,77,255,.4);
+">
+SWITCH THEME
+</button>
+
 .top{
     display:flex;
     justify-content:space-between;
@@ -700,7 +713,7 @@ body::after{
 
             <div class="nav-item">
                 <div class="nav-icon"> ✅ </div>
-                <span>ใช้ดีฝากบอกต่อ</span>
+                <span>ของดีบอกต่อ</span>
             </div>
 
             <div class="nav-item">
@@ -1201,6 +1214,72 @@ document
 
 <style>
 
+body.purple-theme{
+
+    /* BACKGROUND */
+    background:radial-gradient(circle at top, #1a0b2e, #0b0614 60%, #05030a);
+
+}
+
+/* WINDOW */
+body.purple-theme .window{
+    border:1px solid rgba(124,77,255,.25);
+    box-shadow:0 0 60px rgba(124,77,255,.25);
+}
+
+/* SIDEBAR */
+body.purple-theme .sidebar{
+    background:rgba(255,255,255,.04);
+    border-right:1px solid rgba(124,77,255,.2);
+}
+
+/* KEY BOX */
+body.purple-theme .key-box{
+    background:linear-gradient(135deg, #7c4dff, #b388ff);
+    box-shadow:0 0 30px rgba(124,77,255,.35);
+}
+
+/* NAV */
+body.purple-theme .nav-item.active{
+    background:linear-gradient(90deg, rgba(124,77,255,.25), rgba(255,255,255,.05));
+    border-color:rgba(124,77,255,.35);
+}
+
+/* ICONS */
+body.purple-theme .nav-icon,
+body.purple-theme .mini{
+    background:rgba(124,77,255,.18);
+}
+
+/* BUTTON */
+body.purple-theme .main-btn{
+    background:linear-gradient(135deg, #7c4dff, #b388ff);
+    box-shadow:0 0 25px rgba(124,77,255,.4);
+}
+
+/* CARD GLASS */
+body.purple-theme .card{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(124,77,255,.15);
+    backdrop-filter:blur(22px);
+}
+
+/* WARNING */
+body.purple-theme .warning{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(124,77,255,.15);
+}
+
+body.purple-theme .warn-icon{
+    background:rgba(124,77,255,.2);
+}
+
+/* SWITCH */
+body.purple-theme .switch input:checked + .slider{
+    background:#7c4dff;
+    box-shadow:0 0 18px rgba(124,77,255,.5);
+}
+
 #lightning{
     position:fixed;
     inset:0;
@@ -1515,11 +1594,16 @@ function drawLightning(){
     },80);
 }
 
+<canvas id="lightning"></canvas>
+
 setInterval(drawLightning, 1200);
 </script>
 
+<script>
+document.getElementById("themeToggle").onclick = () => {
+    document.body.classList.toggle("purple-theme");
+};
+</script>
+
 </body>
-
-<canvas id="lightning"></canvas>
-
 </html>
