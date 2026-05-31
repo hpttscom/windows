@@ -930,6 +930,49 @@ btn.onclick = () => {
 
 };
 
+async function saveLoginHistory(key){
+
+try{
+
+const ref =
+doc(
+db,
+"keys",
+key
+);
+
+await updateDoc(
+ref,
+{
+
+history:
+
+arrayUnion({
+
+time:
+new Date()
+.toLocaleString(),
+
+device:
+deviceId,
+
+agent:
+navigator.userAgent
+
+})
+
+}
+
+);
+
+}catch(e){
+
+console.log(e);
+
+}
+
+}
+
 </script>
 
 <script type="module">
@@ -943,7 +986,8 @@ import {
 getFirestore,
 doc,
 getDoc,
-updateDoc
+updateDoc,
+arrayUnion
 
 }
 
