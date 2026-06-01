@@ -1295,42 +1295,43 @@ body.purple-theme .switch input:checked + .slider{
 #keyOverlay{
 position:fixed;
 inset:0;
-background:rgba(255,248,241,.97);
+
+background:
+rgba(247,243,255,.82);
+
+backdrop-filter:blur(18px);
+
 display:flex;
 justify-content:center;
 align-items:center;
+
 z-index:999999;
 }
 
 .keyLogin{
 
 width:90%;
-
 max-width:420px;
 
-padding:35px;
+padding:38px;
 
-border-radius:30px;
+border-radius:34px;
 
 text-align:center;
 
-box-shadow:
-0 20px 60px rgba(0,0,0,.12);
-
 background:
+rgba(255,255,255,.78);
 
-linear-gradient(
-rgba(255,255,255,.82),
-rgba(255,255,255,.82)
-),
+backdrop-filter:blur(30px);
 
-url("https://i.postimg.cc/1R6jrNGt/quality-restoration-25690531122239716.png");
+border:
+1px solid rgba(178,102,255,.15);
 
-background-size:cover;
+box-shadow:
 
-background-position:center;
+0 25px 70px rgba(178,102,255,.18),
 
-backdrop-filter:blur(8px);
+inset 0 1px 0 rgba(255,255,255,.9);
 
 }
 
@@ -1338,28 +1339,27 @@ backdrop-filter:blur(8px);
 
 width:100%;
 
-height:58px;
+height:60px;
 
-border:none;
+background:
 
-outline:none;
+rgba(255,255,255,.9);
 
-background:#f4f4f4;
+border:
+
+1px solid rgba(178,102,255,.12);
 
 border-radius:18px;
 
-padding:0 18px;
-
-margin-bottom:15px;
+padding:0 20px;
 
 font-size:16px;
-
-color:#111;
 
 font-weight:700;
 
 box-shadow:
-0 5px 15px rgba(0,0,0,.05);
+
+0 8px 20px rgba(178,102,255,.08);
 
 }
 
@@ -1370,37 +1370,48 @@ color:#888;
 }
 
 .keyLogin button{
+
 width:100%;
-height:58px;
+
+height:60px;
+
 border:none;
+
 border-radius:18px;
-background:#ff8c00;
+
+background:
+
+linear-gradient(
+135deg,
+#b266ff,
+#d4b0ff
+);
+
 color:white;
-font-weight:800;
+
+font-weight:900;
+
 font-size:16px;
+
+box-shadow:
+
+0 15px 30px rgba(178,102,255,.18);
+
 }
 
 .buyBtn{
 
-width:100%;
+background:white;
 
-height:58px;
+color:#b266ff;
 
-margin-top:12px;
+border:
 
-border:none;
+2px solid rgba(178,102,255,.20);
 
-border-radius:18px;
+box-shadow:
 
-background:#ffffff;
-
-color:#ff8c00;
-
-font-weight:800;
-
-font-size:16px;
-
-border:2px solid #ff8c00;
+0 8px 20px rgba(178,102,255,.08);
 
 }
 
