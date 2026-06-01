@@ -285,19 +285,6 @@ body::after{
 
 /* TOP */
 
-<button id="themeToggle" style="
-padding:10px 14px;
-border-radius:12px;
-border:none;
-font-weight:800;
-cursor:pointer;
-background:#7c4dff;
-color:white;
-box-shadow:0 0 15px rgba(124,77,255,.4);
-">
-SWITCH THEME
-</button>
-
 .top{
     display:flex;
     justify-content:space-between;
@@ -656,9 +643,258 @@ SWITCH THEME
     }
 }
 
-</style>
+@keyframes loginFloat{
+
+from{
+transform:translateY(-5px);
+}
+
+to{
+transform:translateY(10px);
+}
+
+}
+
+@keyframes glowMove{
+
+0%{
+transform:rotate(0deg);
+}
+
+100%{
+transform:rotate(360deg);
+}
+
+}
+
+#keyOverlay{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100dvh;
+
+overflow:hidden;
+
+touch-action:none;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:999999;
+
+background:
+
+linear-gradient(
+rgba(255,255,255,.35),
+rgba(255,255,255,.35)
+),
+
+url("https://i.postimg.cc/K8RT1rZF/C8B356F6-C035-45CF-8251-20481F418B52.png");
+
+background-size:cover;
+
+background-position:center;
+
+}
+
+#keyOverlay::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+backdrop-filter:blur(10px);
+
+-webkit-backdrop-filter:blur(10px);
+
+}
+
+.keyLogin{
+
+width:90%;
+
+max-width:380px;
+
+padding:35px;
+
+border-radius:30px;
+
+background:
+
+rgba(255,255,255,.22);
+
+backdrop-filter:blur(22px);
+
+-webkit-backdrop-filter:blur(22px);
+
+border:
+
+1px solid rgba(255,255,255,.35);
+
+box-shadow:
+
+0 0 30px rgba(178,102,255,.25),
+
+0 15px 60px rgba(0,0,0,.2);
+
+text-align:center;
+
+position:relative;
+
+overflow:hidden;
+
+animation:
+
+loginFloat 2.2s ease-in-out infinite alternate;
+
+}
+
+.keyLogin::before{
+
+content:"";
+
+position:absolute;
+
+width:220px;
+
+height:220px;
+
+background:
+
+radial-gradient(
+circle,
+rgba(178,102,255,.6),
+transparent 70%
+);
+
+top:-100px;
+
+left:-80px;
+
+filter:blur(35px);
+
+animation:
+
+glowMove 6s linear infinite;
+
+}
+
+.keyLogin h1{
+
+font-size:30px;
+
+font-weight:900;
+
+letter-spacing:3px;
+
+color:#7d3cff;
+
+margin-bottom:10px;
+
+}
+
+.keyLogin input{
+
+width:100%;
+
+height:58px;
+
+border:none;
+
+outline:none;
+
+padding:0 18px;
+
+background:#f4f4f4;
+
+border-radius:18px;
+
+font-size:16px;
+
+margin-bottom:15px;
+
+}
+
+.keyLogin button{
+
+width:100%;
+
+height:58px;
+
+border:none;
+
+border-radius:18px;
+
+background:#b266ff;
+
+color:white;
+
+font-size:16px;
+
+font-weight:800;
+
+}
+
+.buyKeyBtn{
+
+width:100%;
+
+height:58px;
+
+margin-top:12px;
+
+background:white;
+
+border:2px solid #b266ff;
+
+color:#b266ff;
+
+font-weight:800;
+
+}
+
 </head>
 <body>
+
+<canvas id="lightning"></canvas>
+
+<button id="themeToggle"
+style="
+position:fixed;
+top:20px;
+right:20px;
+z-index:9999;
+
+padding:10px 14px;
+
+border:none;
+
+border-radius:12px;
+
+background:#7c4dff;
+
+color:white;
+
+font-weight:800;
+
+cursor:pointer;
+
+box-shadow:
+0 0 15px rgba(124,77,255,.4);
+">
+
+SWITCH THEME
+
+</button>
 
 <div class="window">
 
@@ -1292,190 +1528,7 @@ body.purple-theme .switch input:checked + .slider{
     opacity:0.7;
 }
 
-#keyOverlay{
-position:fixed;
-inset:0;
-
-background-image:
-url("https://i.postimg.cc/1R6jrNGt/quality-restoration-25690531122239716.png");
-
-background-size:cover;
-background-position:center;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-z-index:999999;
-
-overflow:hidden;
-}
-
-#keyOverlay::before{
-content:"";
-
-position:absolute;
-inset:0;
-
-backdrop-filter:blur(18px);
-
-background:
-rgba(247,243,255,.55);
-
-z-index:-1;
-}
-
-.keyLogin{
-
-width:90%;
-max-width:420px;
-
-padding:38px;
-
-border-radius:34px;
-
-text-align:center;
-
-background:
-rgba(255,255,255,.78);
-
-backdrop-filter:blur(30px);
-
-position:absolute;
-
-cursor:grab;
-
-touch-action:none;
-
-user-select:none;
-
-left:50%;
-top:50%;
-
-transform:
-translate(-50%,-50%);
-
-}
-
-.keyLogin input{
-
-width:100%;
-
-height:60px;
-
-background:
-
-rgba(255,255,255,.9);
-
-border:
-
-1px solid rgba(178,102,255,.12);
-
-border-radius:18px;
-
-padding:0 20px;
-
-font-size:16px;
-
-font-weight:700;
-
-box-shadow:
-
-0 8px 20px rgba(178,102,255,.08);
-
-}
-
-.keyLogin input::placeholder{
-
-color:#888;
-
-}
-
-.keyLogin button{
-
-width:85%;
-
-height:58px;
-
-margin:10px auto 0 auto;
-
-display:block;
-
-border:none;
-
-border-radius:18px;
-
-background:
-linear-gradient(
-135deg,
-#b266ff,
-#d4b0ff
-);
-
-color:white;
-
-font-weight:900;
-
-font-size:16px;
-
-box-shadow:
-0 15px 30px rgba(178,102,255,.18);
-
-}
-
-.buyBtn{
-
-background:white;
-
-color:#b266ff;
-
-border:
-
-2px solid rgba(178,102,255,.20);
-
-box-shadow:
-
-0 8px 20px rgba(178,102,255,.08);
-
-}
-
 </style>
-
-<div id="keyOverlay">
-
-<div class="keyLogin">
-
-<h1>Reczssa1.0</h1>
-
-<p style="margin:15px 0;">
-กรอกคีย์เพื่อเข้าใช้งาน
-</p>
-
-<input
-id="keyInput"
-placeholder="ENTER KEY"
-/>
-
-<button onclick="checkKey()">
-
-LOGIN
-
-</button>
-
-<button
-class="buyBtn"
-onclick="
-window.location.href=
-'https://www.tiktok.com/@reczssa325?_r=1&_t=ZS-96oD1OSIctw'
-">
-
-ซื้อคีย์
-
-</button>
-
-</div>
-
-</div>
 
 <script>
 
@@ -1631,8 +1684,6 @@ function drawLightning(){
     },80);
 }
 
-<canvas id="lightning"></canvas>
-
 setInterval(drawLightning, 1200);
 </script>
 
@@ -1644,115 +1695,49 @@ document.getElementById("themeToggle").onclick = () => {
 
 <script>
 
-const loginBox =
-document.querySelector(".keyLogin");
-
-let dragging=false;
-
-let offsetX=0;
-let offsetY=0;
-
-function startDrag(x,y){
-
-dragging=true;
-
-const rect =
-loginBox.getBoundingClientRect();
-
-offsetX =
-x - rect.left;
-
-offsetY =
-y - rect.top;
-
-loginBox.style.cursor=
-"grabbing";
-
-loginBox.style.transform=
-"none";
-
-}
-
-function moveDrag(x,y){
-
-if(!dragging)return;
-
-loginBox.style.left=
-(x-offsetX)+"px";
-
-loginBox.style.top=
-(y-offsetY)+"px";
-
-}
-
-function endDrag(){
-
-dragging=false;
-
-loginBox.style.cursor=
-"grab";
-
-}
-
-/* mouse */
-
-loginBox.addEventListener(
-"mousedown",
-e=>startDrag(
-e.clientX,
-e.clientY
-)
-);
-
-document.addEventListener(
-"mousemove",
-e=>moveDrag(
-e.clientX,
-e.clientY
-)
-);
-
-document.addEventListener(
-"mouseup",
-endDrag
-);
-
-/* touch */
-
-loginBox.addEventListener(
-"touchstart",
-e=>{
-
-const t=
-e.touches[0];
-
-startDrag(
-t.clientX,
-t.clientY
-);
-
-});
-
-document.addEventListener(
-"touchmove",
-e=>{
-
-const t=
-e.touches[0];
-
-moveDrag(
-t.clientX,
-t.clientY
-);
-
-});
-
-document.addEventListener(
-"touchend",
-endDrag
-);
-
 </script>
+
+<div id="keyOverlay">
+
+<div class="keyLogin">
+
+<h1>PREMIUM ACCESS</h1>
+
+<p style="
+margin:15px 0;
+color:#888;
+">
+
+กรอกคีย์เพื่อเข้าใช้งาน
+
+</p>
+
+<input
+id="keyInput"
+placeholder="ENTER KEY"
+/>
+
+<button onclick="checkKey()">
+
+LOGIN
+
+</button>
+
+<button
+class="buyKeyBtn"
+
+onclick="
+window.location.href=
+'https://www.tiktok.com/@reczssa325?_r=1&_t=ZS-96oD1OSIctw'
+">
+
+ซื้อคีย์
+
+</button>
+
+</div>
+
+</div>
 
 </body>
 </html>
