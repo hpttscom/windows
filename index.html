@@ -1296,16 +1296,33 @@ body.purple-theme .switch input:checked + .slider{
 position:fixed;
 inset:0;
 
-background:
-rgba(247,243,255,.82);
+background-image:
+url("https://i.postimg.cc/1R6jrNGt/quality-restoration-25690531122239716.png");
 
-backdrop-filter:blur(18px);
+background-size:cover;
+background-position:center;
 
 display:flex;
 justify-content:center;
 align-items:center;
 
 z-index:999999;
+
+overflow:hidden;
+}
+
+#keyOverlay::before{
+content:"";
+
+position:absolute;
+inset:0;
+
+backdrop-filter:blur(18px);
+
+background:
+rgba(247,243,255,.55);
+
+z-index:-1;
 }
 
 .keyLogin{
@@ -1324,14 +1341,19 @@ rgba(255,255,255,.78);
 
 backdrop-filter:blur(30px);
 
-border:
-1px solid rgba(178,102,255,.15);
+position:absolute;
 
-box-shadow:
+cursor:grab;
 
-0 25px 70px rgba(178,102,255,.18),
+touch-action:none;
 
-inset 0 1px 0 rgba(255,255,255,.9);
+user-select:none;
+
+left:50%;
+top:50%;
+
+transform:
+translate(-50%,-50%);
 
 }
 
@@ -1371,16 +1393,19 @@ color:#888;
 
 .keyLogin button{
 
-width:100%;
+width:85%;
 
-height:60px;
+height:58px;
+
+margin:10px auto 0 auto;
+
+display:block;
 
 border:none;
 
 border-radius:18px;
 
 background:
-
 linear-gradient(
 135deg,
 #b266ff,
@@ -1394,7 +1419,6 @@ font-weight:900;
 font-size:16px;
 
 box-shadow:
-
 0 15px 30px rgba(178,102,255,.18);
 
 }
@@ -1616,6 +1640,118 @@ setInterval(drawLightning, 1200);
 document.getElementById("themeToggle").onclick = () => {
     document.body.classList.toggle("purple-theme");
 };
+</script>
+
+<script>
+
+const loginBox =
+document.querySelector(".keyLogin");
+
+let dragging=false;
+
+let offsetX=0;
+let offsetY=0;
+
+function startDrag(x,y){
+
+dragging=true;
+
+const rect =
+loginBox.getBoundingClientRect();
+
+offsetX =
+x - rect.left;
+
+offsetY =
+y - rect.top;
+
+loginBox.style.cursor=
+"grabbing";
+
+loginBox.style.transform=
+"none";
+
+}
+
+function moveDrag(x,y){
+
+if(!dragging)return;
+
+loginBox.style.left=
+(x-offsetX)+"px";
+
+loginBox.style.top=
+(y-offsetY)+"px";
+
+}
+
+function endDrag(){
+
+dragging=false;
+
+loginBox.style.cursor=
+"grab";
+
+}
+
+/* mouse */
+
+loginBox.addEventListener(
+"mousedown",
+e=>startDrag(
+e.clientX,
+e.clientY
+)
+);
+
+document.addEventListener(
+"mousemove",
+e=>moveDrag(
+e.clientX,
+e.clientY
+)
+);
+
+document.addEventListener(
+"mouseup",
+endDrag
+);
+
+/* touch */
+
+loginBox.addEventListener(
+"touchstart",
+e=>{
+
+const t=
+e.touches[0];
+
+startDrag(
+t.clientX,
+t.clientY
+);
+
+});
+
+document.addEventListener(
+"touchmove",
+e=>{
+
+const t=
+e.touches[0];
+
+moveDrag(
+t.clientX,
+t.clientY
+);
+
+});
+
+document.addEventListener(
+"touchend",
+endDrag
+);
+
 </script>
 
 </body>
