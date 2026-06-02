@@ -862,7 +862,10 @@ font-weight:800;
 
 }
 
+</style>
+
 </head>
+
 <body>
 
 <canvas id="lightning"></canvas>
@@ -1315,26 +1318,56 @@ deviceId
 
 }
 
-/* CHECK KEY */
+window.checkKey = async () => {
 
-window.checkKey =
-async function(){
+try{
+
+const btn =
+document.getElementById(
+"loginBtn"
+);
+
+btn.disabled=true;
+btn.innerText="CHECKING...";
 
 const key =
 document
-.getElementById("keyInput")
+.getElementById(
+"keyInput"
+)
 .value
 .trim();
 
+if(!key){
+
+showToast("กรุณาใส่คีย์");
+
+btn.disabled=false;
+btn.innerText="LOGIN";
+
+return;
+
+}
+
 const ref =
-doc(db,"keys",key);
+doc(
+db,
+"keys",
+key
+);
 
 const snap =
 await getDoc(ref);
 
 if(!snap.exists()){
 
-alert("คีย์ไม่ถูกต้อง กรุณาซื้อคีย์ก่อน");
+showToast(
+"คีย์ไม่ถูกต้อง"
+);
+
+btn.disabled=false;
+btn.innerText="LOGIN";
+
 return;
 
 }
@@ -1342,109 +1375,127 @@ return;
 const data =
 snap.data();
 
-/* BAN CHECK */
-
 if(data.banned){
 
-alert("BANNED");
+showToast(
+"BANNED"
+);
+
+btn.disabled=false;
+btn.innerText="LOGIN";
+
 return;
 
 }
-
-startExpireCountdown(
-data.expire
-);
-
-/* EXPIRE CHECK */
 
 const now =
 new Date();
 
 const expire =
-new Date(data.expire);
+data.expire?.toDate
+? data.expire.toDate()
+: new Date(
+data.expire
+);
 
-if(now > expire){
+if(
+expire &&
+now>expire
+){
 
-alert("KEY EXPIRED");
+showToast(
+"คีย์หมดอายุ"
+);
+
+btn.disabled=false;
+btn.innerText="LOGIN";
+
 return;
 
 }
-
-/* DEVICE LOCK */
 
 if(
 data.used &&
-data.device !== deviceId
+data.device!==deviceId
 ){
 
-alert("คีย์ถูกใช้ไปแล้ว");
+showToast(
+"คีย์ถูกใช้แล้ว"
+);
+
+btn.disabled=false;
+btn.innerText="LOGIN";
+
 return;
 
 }
 
-/* FIRST LOGIN */
-
 if(!data.used){
 
-await updateDoc(ref,{
+await updateDoc(
+ref,
+{
 
 used:true,
-device:deviceId
 
-});
+device:deviceId
 
 }
 
-/* SAVE LOGIN */
+);
+
+}
+
+await saveLoginHistory(key);
 
 localStorage.setItem(
 "saved_key",
 key
 );
 
-saveLoginHistory(
-key
-);
-
-/* SEND HOOK (ยิงแค่ครั้งแรกต่อ key + device) */
-
-const logKey = "logged_" + key + "_" + deviceId;
-
-if (!localStorage.getItem(logKey)) {
-
-  const status =
-    (new Date() > expire)
-      ? "🔴 OFFLINE / EXPIRED"
-      : "🟢 ONLINE / ACTIVE";
-
-  fetch(
-    "https://discord.com/api/webhooks/1510463377212969031/-nlbq7ZQNPeg4_5C5s_t_ZStn5srjsl3gk-D5vbpph9D1wmSVTqvKjtFAMlPBfygdT95",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        content:
-          "━━━━━━━━━━━━\n" +
-          "🔔 LOGIN EVENT\n\n" +
-          "KEY : " + key + "\n" +
-          "DEVICE : " + deviceId + "\n" +
-          "STATUS : " + status + "\n" +
-          "EXPIRE : " + data.expire + "\n" +
-          "TIME : " + new Date().toLocaleString() + "\n" +
-          "━━━━━━━━━━━━"
-      })
-    }
-  );
-
-  localStorage.setItem(logKey, "1");
-}
-
-alert("ล็อคอินสำเสร็จ");
-
 document
 .getElementById(
 "keyOverlay"
-).style.display="none";
+)
+.style.display=
+"none";
+
+if(expire){
+
+startExpireCountdown(
+expire
+);
+
+}
+
+showToast(
+"เข้าสู่ระบบสำเร็จ"
+);
+
+btn.disabled=false;
+
+btn.innerText=
+"LOGIN";
+
+}catch(err){
+
+console.log(err);
+
+showToast(
+"ERROR"
+);
+
+const btn=
+document.getElementById(
+"loginBtn"
+);
+
+btn.disabled=false;
+
+btn.innerText=
+"LOGIN";
+
+}
 
 };
 
@@ -1703,13 +1754,8 @@ document.getElementById("themeToggle").onclick = () => {
 
 <h1>PREMIUM ACCESS</h1>
 
-<p style="
-margin:15px 0;
-color:#888;
-">
-
+<p style="margin:15px 0;color:#888;">
 กรอกคีย์เพื่อเข้าใช้งาน
-
 </p>
 
 <input
@@ -1717,7 +1763,9 @@ id="keyInput"
 placeholder="ENTER KEY"
 />
 
-<button onclick="checkKey()">
+<button
+id="loginBtn"
+onclick="checkKey()">
 
 LOGIN
 
@@ -1727,8 +1775,10 @@ LOGIN
 class="buyKeyBtn"
 
 onclick="
-window.location.href=
-'https://www.tiktok.com/@reczssa325?_r=1&_t=ZS-96oD1OSIctw'
+window.open(
+'https://www.tiktok.com/',
+'_blank'
+)
 ">
 
 ซื้อคีย์
@@ -1738,6 +1788,120 @@ window.location.href=
 </div>
 
 </div>
+
+<div id="toast">
+
+<span id="toastText"></span>
+
+</div>
+
+</div>
+
+<style>
+
+#toast{
+
+position:fixed;
+
+top:50%;
+
+left:50%;
+
+transform:
+translate(-50%,-50%)
+scale(.8);
+
+background:
+rgba(30,30,30,.92);
+
+color:#fff;
+
+padding:
+18px 28px;
+
+border-radius:18px;
+
+font-weight:700;
+
+opacity:0;
+
+pointer-events:none;
+
+transition:.25s;
+
+z-index:999999999;
+
+}
+
+#toast.show{
+
+opacity:1;
+
+transform:
+translate(-50%,-50%)
+scale(1);
+
+}
+
+</style>
+
+<script>
+
+function showToast(text){
+
+const toast=
+document.getElementById(
+"toast"
+);
+
+document.getElementById(
+"toastText"
+).innerText=
+text;
+
+toast.classList.add(
+"show"
+);
+
+setTimeout(()=>{
+
+toast.classList.remove(
+"show"
+);
+
+},2000);
+
+}
+
+</script>
+
+<script>
+
+window.addEventListener(
+"load",
+()=>{
+
+const saved =
+localStorage.getItem(
+"saved_key"
+);
+
+if(saved){
+
+document
+.getElementById(
+"keyInput"
+).value=saved;
+
+checkKey();
+
+}
+
+}
+
+);
+
+</script>
 
 </body>
 </html>
