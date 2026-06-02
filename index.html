@@ -1728,13 +1728,6 @@ function drawLightning(){
 
     ctx.stroke();
 
-    // flash effect
-    document.body.style.filter = "brightness(1.4)";
-    setTimeout(()=>{
-        document.body.style.filter = "brightness(1)";
-    },80);
-}
-
 setInterval(drawLightning, 1200);
 </script>
 
