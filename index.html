@@ -115,6 +115,11 @@ body::after{
 /* ===== SIDEBAR ===== */
 
 .sidebar{
+
+<button id="logoutBtn" class="btn second-btn" style="margin-top:15px;">
+    ออกจากระบบ
+</button>
+
     width:300px;
 
     background:
@@ -1137,6 +1142,10 @@ SWITCH THEME
 
         <div class="actions">
 
+<button class="btn second-btn" id="logoutBtn">
+    LOGOUT
+</button>
+
             <button
             class="btn main-btn"
             id="activateBtn">
@@ -1472,6 +1481,10 @@ showToast(
 "เข้าสู่ระบบสำเร็จ"
 );
 
+sendWebhook(key, "LOGIN");
+
+sendDiscordLog(key, deviceId);
+
 btn.disabled=false;
 
 btn.innerText=
@@ -1590,14 +1603,36 @@ localStorage.getItem(
 "saved_key"
 );
 
-if(saved){
+if(saved && document.getElementById("keyOverlay").style.display !== "none"){
+    document.getElementById("keyInput").value = saved;
+    checkKey();
+}
 
-document
-.getElementById(
-"keyInput"
-).value=saved;
+const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1510463377212969031/-nlbq7ZQNPeg4_5C5s_t_ZStn5srjsl3gk-D5vbpph9D1wmSVTqvKjtFAMlPBfygdT95";
 
-checkKey();
+function sendDiscordLog(key, deviceId) {
+    fetch(DISCORD_WEBHOOK_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            content: "🔐 LOGIN SUCCESS",
+            embeds: [
+                {
+                    title: "Key Login Alert",
+                    color: 0x7c4dff,
+                    fields: [
+                        { name: "KEY", value: key, inline: true },
+                        { name: "DEVICE", value: deviceId, inline: false },
+                        { name: "TIME", value: new Date().toLocaleString(), inline: false },
+                        { name: "UA", value: navigator.userAgent, inline: false }
+                    ]
+                }
+            ]
+        })
+    });
+}
 
 }
 
@@ -1888,6 +1923,8 @@ document
 
 checkKey();
 
+
+
 }
 
 }
@@ -1895,6 +1932,54 @@ checkKey();
 );
 
 </script>
+
+document.getElementById("logoutBtn").onclick = () => {
+
+    localStorage.removeItem("saved_key");
+
+    document.getElementById("keyOverlay").style.display = "flex";
+
+    document.getElementById("keyInput").value = "";
+
+    showToast("ออกจากระบบแล้ว");
+
+};
+
+<script>
+document.getElementById("logoutBtn").onclick = () => {
+
+    const key = localStorage.getItem("saved_key");
+
+    // ยิง webhook ตอน logout
+    sendWebhook(key, "LOGOUT");
+
+    localStorage.removeItem("saved_key");
+
+    document.getElementById("keyOverlay").style.display = "flex";
+    document.getElementById("keyInput").value = "";
+
+    showToast("ออกจากระบบแล้ว");
+};
+</script>
+
+const WEBHOOK_URL = "ใส่ลิงก์ดิสคอร์ดเว็บฮุกตรงนี้";
+
+function sendWebhook(key, action){
+
+    fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            content: `🔔 ACTION: ${action}
+🔑 KEY: ${key}
+📱 DEVICE: ${deviceId}
+🕒 TIME: ${new Date().toLocaleString()}`
+        })
+    }).catch(err => console.log("Webhook error:", err));
+
+}
 
 </body>
 </html>
