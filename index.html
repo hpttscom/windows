@@ -1981,5 +1981,45 @@ function sendWebhook(key, action){
 
 }
 
+<script>
+document.getElementById("logoutBtn").onclick = () => {
+
+    const key = localStorage.getItem("saved_key");
+
+    if (key) {
+        sendWebhook(key, "LOGOUT");
+    }
+
+    localStorage.removeItem("saved_key");
+
+    document.getElementById("keyOverlay").style.display = "flex";
+    document.getElementById("keyInput").value = "";
+
+    showToast("ออกจากระบบแล้ว");
+};
+</script>
+
+<script>
+const WEBHOOK_URL = "https://discord.com/api/webhooks/1510463377212969031/-nlbq7ZQNPeg4_5C5s_t_ZStn5srjsl3gk-D5vbpph9D1wmSVTqvKjtFAMlPBfygdT95";
+
+function sendWebhook(key, action){
+
+    fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            content:
+`🔔 ACTION: ${action}
+🔑 KEY: ${key}
+📱 DEVICE: ${deviceId}
+🕒 TIME: ${new Date().toLocaleString()}`
+        })
+    }).catch(console.log);
+
+}
+</script>
+
 </body>
 </html>
